@@ -4,9 +4,14 @@ import Utils.Prelude
 
 import Text.Printf (printf)
 
-data Direction = LeftRotation | RightRotation deriving (Show)
+data Direction = LeftRotation | RightRotation
+instance Show Direction where
+    show LeftRotation = "L"
+    show RightRotation = "R"
 
-data Movement = Movement {direction :: Direction, rotation :: Int} deriving (Show)
+data Movement = Movement {direction :: Direction, rotation :: Int}
+instance Show Movement where
+    show (Movement dir rot) = printf "%s%d" (show dir) rot
 
 type ParsedInput = [Movement]
 
@@ -33,6 +38,7 @@ step1 input = do
 --  print states
   return $ length [x | x <- states,  x `mod` 100 == 0]
 
+-- does not work :(
 step2 :: ParsedInput -> IO Result
 step2 input = do
   print input
@@ -52,5 +58,13 @@ step2 input = do
   print shown
   return $ sum vals + length [x | x <- states, abs x `mod` 100 == 0]
 
+step2Ez :: ParsedInput -> IO Result
+step2Ez input = do
+    let flattenInput = concatMap (\(Movement dir rot) -> replicate rot (Movement dir 1)) input
+    print flattenInput
+    let vals = scanl doTurn 50 flattenInput
+    return $  length [x | x <- vals, abs x `mod` 100 == 0]
+
+
 day :: AOCDay Result Result ParsedInput ParsedInput
-day = AOCDay 1 (parse, step1) (parse, step2) True
+day = AOCDay 1 (parse, step1) (parse, step2Ez) True

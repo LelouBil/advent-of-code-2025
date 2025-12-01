@@ -66,8 +66,6 @@ withEof a = do
   _ <- eof
   return res
 
-
-
 integer :: Parser Int
 integer = do
   d <- many1 digit
@@ -96,15 +94,12 @@ onePerLine lineParser =
 -- only run real
 benchDay :: (Show a) => (Show b) => AOCDay a b i ii -> Benchmarkable
 benchDay day = whnfIO $ do
-  putStrLn $ printf "BENCH -- Day %d" (num day)
-  putStrLn "Real File"
-  real_res <- runExceptT $ runDayInput day (printf "app/Day%02d/input.txt" (num day)) True
+  real_res <- silence $ runExceptT $ runDayInput day (printf "app/Day%02d/input.txt" (num day)) True
   case real_res of
     Left e -> putStrLn $ printf "Error : %s" (show e)
     Right _ -> return ()
 
-
-parseAndRun :: (DayParser i, i -> IO a) -> SourceName -> Bool ->ExceptT AOCException IO a
+parseAndRun :: (DayParser i, i -> IO a) -> SourceName -> Bool -> ExceptT AOCException IO a
 parseAndRun (parser, runner) filepath silent =
   let parserFull = parser
       withSilence = if silent then silence else id
@@ -117,13 +112,13 @@ parseAndRun (parser, runner) filepath silent =
 
 runDayInput :: (Show a) => (Show b) => AOCDay a b i ii -> String -> Bool -> ExceptT AOCException IO ()
 runDayInput day filePath silent = do
-        liftIO $ putStrLn $ decorate "- First Star" firstStarCol
-        a <- parseAndRun (firstStar day) filePath silent
-        liftIO $ putStrLn $ flip decorate resultCol $ printf "Result : %s" (show a)
-        liftIO $ putStrLn $ decorate "- Second Star" secondStarCol
-        b <- parseAndRun (secondStar day) filePath silent
-        liftIO $ putStrLn $ flip decorate resultCol $ printf "Result : %s" (show b)
-        return ()
+  liftIO $ putStrLn $ decorate "- First Star" firstStarCol
+  a <- parseAndRun (firstStar day) filePath silent
+  liftIO $ putStrLn $ flip decorate resultCol $ printf "Result : %s" (show a)
+  liftIO $ putStrLn $ decorate "- Second Star" secondStarCol
+  b <- parseAndRun (secondStar day) filePath silent
+  liftIO $ putStrLn $ flip decorate resultCol $ printf "Result : %s" (show b)
+  return ()
 
 runDay :: (Show a) => (Show b) => AOCDay a b i ii -> IO ()
 runDay day =

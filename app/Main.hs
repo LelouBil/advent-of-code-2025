@@ -1,12 +1,12 @@
 module Main (main) where
 
---import Criterion.Main
+import Criterion.Main
 import Day01.Main (day)
-import Utils.AOC (runDay) -- , benchDay)
+import Utils.AOC (runDay , benchDay)
 
 main :: IO ()
 main = do
   let today = day
   runDay today
 --  putStrLn "--- Benching ---"
---  defaultMain [bench "day" $  benchDay today]
+--  defaultMain [bench "day" $ benchDay today]
