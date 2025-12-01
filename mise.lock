@@ -1,0 +1,3 @@
+[[tools.stack]]
+version = "3.7.1"
+backend = "aqua:commercialhaskell/stack"
