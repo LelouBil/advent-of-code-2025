@@ -1,7 +1,7 @@
 module Main (main) where
 
 import Criterion.Main
-import Day01.Main (day)
+import Day02.Main (day)
 import Utils.AOC (runDay , benchDay)
 
 main :: IO ()

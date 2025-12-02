@@ -13,7 +13,8 @@ module Utils.Prelude (
     module Text.Parsec,
     module Text.Parsec.String,
     module Data.List,
-    module Data.Functor
+    module Data.Functor,
+    module Control.Monad
     ) where
 import Utils.AOC (AOCDay (..),idParse,onePerLine,integer,spaceChar,sepBySpaces,sepBySpaces1,manySpaces,withEof)
 import Text.Parsec hiding (parse,State)
@@ -21,3 +22,4 @@ import Text.Parsec.Char
 import Text.Parsec.String
 import Data.List hiding (uncons)
 import Data.Functor hiding (unzip)
+import Control.Monad
