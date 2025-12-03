@@ -29,6 +29,7 @@ snapshot: lts-23.0
 #   subdirs:
 #   - auto-update
 #   - wai
+notify-if-nix-on-path: false
 packages:
 - .
 # Dependency packages to be pulled from upstream that are not in the snapshot.

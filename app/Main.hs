@@ -1,12 +1,17 @@
 module Main (main) where
 
 import Criterion.Main
-import Day02.Main (day)
+import Day03.Main (day)
 import Utils.AOC (runDay , benchDay)
+import Control.Monad
+
+doBench :: Bool
+doBench = False
 
 main :: IO ()
 main = do
   let today = day
   runDay today
---  putStrLn "--- Benching ---"
---  defaultMain [bench "day" $ benchDay today]
+  when doBench $ do
+    putStrLn "--- Benching ---"
+    defaultMain [bench "day" $ benchDay today]

@@ -5,3 +5,5 @@ lockfile = true
 [tools]
 stack = "latest"
 
+[tasks.run]
+run = "stack run"
