@@ -12,6 +12,8 @@ type Bank = [Battery]
 
 type AllBanks = [Bank]
 
+
+
 parse :: Parser ParsedInput
 step1, step2 :: ParsedInput -> IO Result
 day :: AOCDay Result Result ParsedInput ParsedInput

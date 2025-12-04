@@ -6,7 +6,7 @@ import Utils.AOC (runDay , benchDay)
 import Control.Monad
 
 doBench :: Bool
-doBench = False
+doBench = True
 
 main :: IO ()
 main = do
